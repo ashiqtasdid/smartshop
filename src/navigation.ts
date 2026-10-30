@@ -20,6 +20,14 @@ function updateActiveLink() {
   if (visibleBottom >= pageBottom - 4) {
     activeSection = "contact";
   }
+
+  for (const link of links) {
+    if (link.hash === "#" + activeSection) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  }
 }
 
 export function startNavigation() {
