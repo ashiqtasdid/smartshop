@@ -1,31 +1,29 @@
 import { element } from "./ui.ts";
 
-const mainNav = element("main-nav");
+const links = element("main-nav").querySelectorAll("a");
+const sections = ["home", "products", "about", "reviews", "contact"];
 
 function updateActiveLink() {
   let activeSection = "home";
-  const headerHeight = document
-    .querySelector("header")!
-    .getBoundingClientRect().height;
-  for (const id of ["home", "products", "about", "reviews", "contact"]) {
-    if (element(id).getBoundingClientRect().top <= headerHeight + 130)
+  const header = document.querySelector("header")!;
+  const sectionLimit = header.offsetHeight + 130;
+
+  for (const id of sections) {
+    const sectionTop = element(id).getBoundingClientRect().top;
+    if (sectionTop <= sectionLimit) {
       activeSection = id;
+    }
   }
-  if (
-    window.scrollY + window.innerHeight >=
-    document.documentElement.scrollHeight - 4
-  )
+
+  const visibleBottom = window.scrollY + window.innerHeight;
+  const pageBottom = document.documentElement.scrollHeight;
+  if (visibleBottom >= pageBottom - 4) {
     activeSection = "contact";
-  for (const link of mainNav.querySelectorAll("a")) {
-    const selected = link.hash === "#" + activeSection;
-    link.classList.toggle("font-bold", selected);
-    if (selected) link.setAttribute("aria-current", "page");
-    else link.removeAttribute("aria-current");
   }
 }
 
 export function startNavigation() {
-  window.addEventListener("scroll", updateActiveLink, { passive: true });
+  window.addEventListener("scroll", updateActiveLink);
   window.addEventListener("resize", updateActiveLink);
   element("back-to-top").addEventListener("click", function () {
     window.scrollTo(0, 0);
