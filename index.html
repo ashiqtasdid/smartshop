@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>SmartShop</title>
+  </head>
+  <body>
+    <a class="fixed -top-24 left-4 z-50 bg-ink p-3 text-white focus:top-3" href="#products">Skip to products</a>
+    <header class="sticky top-0 z-20 bg-white">
+      <div class="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-10 grid min-h-26 grid-cols-[1fr_auto] items-center gap-x-4 py-3 md:flex md:min-h-22 md:justify-between md:gap-6 md:py-0">
+        <h1 class="text-2xl font-bold tracking-tight">SmartShop<span aria-hidden="true">.</span></h1>
+        <nav id="main-nav" aria-label="Main navigation" class="col-span-2 row-start-2 flex justify-between gap-3 text-[13px] md:gap-6 md:text-sm [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_a]:text-muted [&_a:hover]:text-ink [&_a[aria-current]]:font-semibold [&_a[aria-current]]:text-ink [&_a[aria-current]]:underline [&_a[aria-current]]:decoration-2 [&_a[aria-current]]:underline-offset-8">
+          <a href="#home" aria-current="page">Home</a>
+          <a href="#products">Products</a>
+          <a href="#about">About us</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a href="#cart" class="col-start-2 row-start-1 flex min-h-11 items-center gap-2 text-sm">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 7h12l1 14H5L6 7Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          Cart <span id="cart-count" class="min-w-6 rounded bg-surface text-center tabular-nums">0</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="[&_section]:scroll-mt-36 [&_aside]:scroll-mt-36 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-10">
+      <section id="home" class="mb-8 pt-3 sm:mb-12 sm:pt-2">
+        <div id="banner" class="grid min-h-64 grid-cols-[minmax(0,1fr)_110px] grid-rows-[1fr_auto] items-center rounded-md bg-surface p-6 sm:min-h-76 sm:grid-cols-[1fr_42%] sm:px-12 sm:py-8" aria-label="Product banner" aria-roledescription="carousel">
+          <div class="[&_h2]:text-3xl [&_h2]:tracking-tight sm:[&_h2]:text-5xl [&_p]:mt-3 [&_p]:max-w-[22ch] [&_p]:text-sm [&_p]:text-muted sm:[&_p]:text-base">
+            <h2 id="banner-title">Backpacks</h2>
+            <p>Clothing, bags, and more.</p>
+            <a href="#products" class="mt-3 inline-flex min-h-11 items-center gap-3 text-sm font-medium hover:underline">Browse products <span aria-hidden="true">&rarr;</span></a>
+          </div>
+          <img id="banner-image" src="/images/bag.png" alt="Navy canvas backpack" width="300" height="280" class="col-start-2 row-span-2 row-start-1 h-40 w-full max-w-70 justify-self-center object-contain mix-blend-multiply sm:h-60" />
+          <div class="flex items-center gap-2 col-span-2 mt-4 sm:col-span-1">
+            <button id="banner-prev" type="button" aria-label="Previous promotion" class="inline-flex size-11 shrink-0 items-center justify-center rounded bg-white hover:bg-hover"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m12 5-5 5 5 5"/></svg></button>
+            <span id="banner-position" class="min-w-9 text-center text-sm text-muted tabular-nums">1 / 3</span>
+            <button id="banner-next" type="button" aria-label="Next promotion" class="inline-flex size-11 shrink-0 items-center justify-center rounded bg-white hover:bg-hover"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m8 5 5 5-5 5"/></svg></button>
+            <button id="banner-pause" type="button" aria-label="Pause promotions" class="min-h-11 p-2 text-sm text-muted hover:text-ink hover:underline hover:underline-offset-4">Pause</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_340px]">
+        <section id="products" class="min-w-0">
+          <div class="mb-5 flex flex-col justify-between gap-5 sm:mb-6 sm:flex-row sm:items-end lg:flex-col lg:items-stretch xl:flex-row xl:items-end [&_h2]:mb-2">
+            <div>
+              <h2>Products</h2>
+              <p id="product-count" role="status" class="text-sm text-muted">Loading products&hellip;</p>
+            </div>
+            <div class="w-full sm:w-1/2 lg:w-full xl:w-64">
+              <label for="search">Search products</label>
+              <input id="search" type="search" placeholder="Search by name" />
+            </div>
+          </div>
+          <div class="mb-6 flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+            <div id="category-filters" role="group" aria-label="Filter by category" class="flex min-w-0 flex-1 flex-wrap gap-2"></div>
+            <div class="shrink-0">
+              <label for="price-sort" class="sr-only">Sort products</label>
+              <select id="price-sort" class="min-h-11 w-full rounded border border-line bg-white px-3 py-2.5 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent xl:w-auto">
+                <option value="default">Sort: Default order</option>
+                <option value="low-to-high">Price: Low to High</option>
+                <option value="high-to-low">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+          <div id="product-grid" class="grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 sm:gap-x-5 sm:gap-y-8 lg:grid-cols-2 xl:grid-cols-3" aria-busy="true"></div>
+        </section>
+
+        <aside id="cart" class="rounded-md bg-surface p-5 sm:p-6 lg:sticky lg:top-26" aria-labelledby="cart-heading">
+          <div class="flex items-center justify-between gap-3 [&_h2]:text-2xl">
+            <h2 id="cart-heading">Your cart</h2>
+            <button id="clear-cart" type="button" hidden class="min-h-11 p-2 text-sm text-muted hover:text-ink hover:underline hover:underline-offset-4">Clear cart</button>
+          </div>
+          <div class="mt-6">
+            <p class="text-sm text-muted">Demo balance</p>
+            <div class="mt-1 flex flex-wrap items-center justify-between gap-2 [&_strong]:text-[22px] [&_strong]:font-semibold [&_strong]:tabular-nums [&_button]:px-3 [&_button]:text-[13px]">
+              <strong id="balance">&#2547;5,000.00</strong>
+              <button id="add-money" type="button" class="inline-flex min-h-11 items-center justify-center rounded px-4 py-2.5 text-sm font-medium bg-white text-ink hover:bg-hover">Add &#2547;1,000</button>
+            </div>
+          </div>
+          <div id="cart-items" class="my-6 max-h-80 overflow-y-auto"></div>
+          <form id="coupon-form" >
+            <label for="coupon">Coupon code</label>
+            <div class="flex gap-2 [&_input]:flex-1 [&_button]:shrink-0">
+              <input id="coupon" type="text" maxlength="30" placeholder="Enter code" />
+              <button type="submit" class="inline-flex min-h-11 items-center justify-center rounded px-4 py-2.5 text-sm font-medium bg-white text-ink hover:bg-hover">Apply</button>
+            </div>
+          </form>
+          <p id="coupon-message" role="status" class="mt-2 text-[13px] text-muted">Try MEOW for 10% off.</p>
+          <button id="remove-coupon" type="button" hidden class="min-h-11 p-2 text-sm text-muted hover:text-ink hover:underline hover:underline-offset-4 pl-0">Remove coupon</button>
+          <dl class="mt-6 text-sm [&>div]:mt-3 [&>div]:flex [&>div]:items-baseline [&>div]:justify-between [&>div]:gap-3 [&_dt]:text-muted [&_dd]:tabular-nums">
+            <div><dt>Subtotal</dt><dd id="subtotal">&#2547;0.00</dd></div>
+            <div><dt>Delivery charge</dt><dd id="delivery">&#2547;0.00</dd></div>
+            <div><dt>Shipping cost</dt><dd id="shipping">&#2547;0.00</dd></div>
+            <div><dt>Discount <span id="discount-label"></span></dt><dd id="discount">&minus;&#2547;0.00</dd></div>
+            <div class="mt-6! text-[22px] font-semibold [&_dt]:text-ink!"><dt>Total</dt><dd id="total">&#2547;0.00</dd></div>
+          </dl>
+          <p id="remaining" class="mt-1 text-[13px] text-muted"></p>
+          <p class="mt-6 text-[13px] leading-relaxed text-muted">Demo prices: US$1 = &#2547;121. Delivery &#2547;60 and shipping &#2547;40 per non-empty cart. No real orders or payments.</p>
+        </aside>
+      </div>
+
+      <section id="special-offers" class="mt-12 sm:mt-16">
+        <div id="offer-panel" class="flex flex-col justify-between gap-6 rounded-md bg-accent p-6 text-white sm:flex-row sm:items-center sm:p-10">
+          <div><h2>Special offer</h2><p class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">10% off your products.</p><p class="mt-3 max-w-lg text-sm leading-relaxed text-white/90">Use MEOW in your demo cart. Delivery and shipping are excluded. One discount per cart.</p></div>
+          <button id="use-offer" type="button" class="min-h-11 shrink-0 self-start rounded bg-white px-5 py-3 text-sm font-medium text-ink hover:bg-hover sm:self-center">Use MEOW</button>
+        </div>
+      </section>
+
+      <section id="about" class="grid gap-8 py-12 sm:gap-12 sm:py-16 lg:grid-cols-[1fr_2fr]">
+        <div><h2>About SmartShop</h2><p class="mt-4 max-w-sm leading-relaxed text-muted">A student-built shopping experience that makes browsing products and understanding a cart simple.</p></div>
+        <div>
+          <p class="max-w-2xl leading-relaxed">SmartShop lets you search products, compare prices in BDT, and manage a cart with delivery charges and discounts.</p>
+          <p class="mt-3 max-w-2xl leading-relaxed text-muted">A CSE-3532 project at International Islamic University Chittagong.</p>
+          <h3 class="mt-8 text-lg font-semibold">Created by</h3>
+          <p class="mt-4 font-medium">Md. Ashiquzzaman Khan</p>
+          <p class="mt-1 text-sm text-muted">Student ID: C243005</p>
+          <p class="mt-2 text-sm text-muted">Full Stack Developer</p>
+        </div>
+      </section>
+
+      <section id="reviews" class="mt-12 grid gap-6 rounded-md bg-surface p-6 sm:mt-16 sm:p-10 lg:grid-cols-[1fr_2fr] lg:gap-12">
+        <div class="[&>p]:mt-3 [&>div]:mt-6">
+          <h2>Reviews</h2>
+          <p class="text-sm text-muted">Sample reviews for this class project.</p>
+          <div class="flex items-center gap-2">
+            <button id="review-prev" type="button" aria-label="Previous review" class="inline-flex size-11 shrink-0 items-center justify-center rounded bg-white hover:bg-hover"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m12 5-5 5 5 5"/></svg></button>
+            <span id="review-position" class="min-w-9 text-center text-sm text-muted tabular-nums">0 / 0</span>
+            <button id="review-next" type="button" aria-label="Next review" class="inline-flex size-11 shrink-0 items-center justify-center rounded bg-white hover:bg-hover"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m8 5 5 5-5 5"/></svg></button>
+            <button id="review-pause" type="button" aria-label="Pause reviews" class="min-h-11 p-2 text-sm text-muted hover:text-ink hover:underline hover:underline-offset-4">Pause</button>
+          </div>
+        </div>
+        <div id="review-carousel" aria-label="Customer reviews" aria-roledescription="carousel">Loading reviews&hellip;</div>
+      </section>
+
+      <section id="faq" class="grid gap-6 py-12 sm:py-16 lg:grid-cols-[1fr_2fr] lg:gap-12">
+        <div><h2>FAQs</h2><p class="mt-3 text-sm text-muted">A few answers before you shop.</p></div>
+        <div class="space-y-3">
+          <details name="faq" class="group rounded bg-surface p-5">
+            <summary class="cursor-pointer font-medium">Can I place a real order?</summary>
+            <p class="mt-3 leading-relaxed text-muted">SmartShop is a student project. You can explore products and try the cart, but there is no checkout, payment, or delivery service.</p>
+          </details>
+          <details name="faq" class="group rounded bg-surface p-5">
+            <summary class="cursor-pointer font-medium">How does the MEOW offer work?</summary>
+            <p class="mt-3 leading-relaxed text-muted">Enter MEOW in the cart to take 10% off the product subtotal. Delivery and shipping stay the same. Applying the code again does not add another discount.</p>
+          </details>
+          <details name="faq" class="group rounded bg-surface p-5">
+            <summary class="cursor-pointer font-medium">What happens to my demo balance?</summary>
+            <p class="mt-3 leading-relaxed text-muted">You start with &#2547;5,000 and can add &#2547;1,000 at a time. The cart cannot exceed your balance. Refreshing the page starts a new session.</p>
+          </details>
+          <details name="faq" class="group rounded bg-surface p-5">
+            <summary class="cursor-pointer font-medium">Are messages and subscriptions saved?</summary>
+            <p class="mt-3 leading-relaxed text-muted">The forms demonstrate validation in your browser. Contact messages are not sent and newsletter email addresses are not saved or subscribed.</p>
+          </details>
+        </div>
+      </section>
+
+      <section id="newsletter" class="grid gap-6 rounded-md bg-surface p-6 sm:p-10 lg:grid-cols-2 lg:items-center lg:gap-12">
+        <div><h2>Newsletter</h2><p class="mt-3 text-muted">Try our newsletter signup.</p><p class="mt-2 text-sm text-muted">Demo only. No emails are saved or sent.</p></div>
+        <form id="newsletter-form" novalidate>
+          <label for="newsletter-email">Email address</label>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <input id="newsletter-email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="newsletter-email-error" placeholder="you@example.com" class="flex-1" />
+            <button type="submit" class="min-h-11 shrink-0 rounded bg-ink px-5 py-3 text-sm font-medium text-white hover:bg-accent">Try signup</button>
+          </div>
+          <p id="newsletter-email-error" class="mt-2 text-sm text-red-700" hidden></p>
+          <p id="newsletter-success" role="status" class="mt-3 text-sm text-accent" hidden></p>
+        </form>
+      </section>
+
+      <section id="contact" class="grid gap-8 py-12 sm:gap-12 sm:py-16 lg:grid-cols-[1fr_2fr]">
+        <div>
+          <h2>Contact us</h2>
+          <p class="mt-4">International Islamic University Chittagong</p>
+          <p class="mt-3 text-sm text-muted">Demo email: <a href="mailto:smartshop@example.com" class="break-all underline underline-offset-4">smartshop@example.com</a></p>
+          <p class="mt-6 max-w-sm text-sm leading-relaxed text-muted">Have a question or an idea for SmartShop? Try the form. This classroom demo validates your message in the browser; it does not send it.</p>
+        </div>
+        <form id="contact-form" novalidate class="space-y-5">
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="contact-name">Name</label>
+              <input id="contact-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="contact-name-error" />
+              <p id="contact-name-error" class="mt-2 text-sm text-red-700" hidden></p>
+            </div>
+            <div>
+              <label for="contact-email">Email</label>
+              <input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="contact-email-error" />
+              <p id="contact-email-error" class="mt-2 text-sm text-red-700" hidden></p>
+            </div>
+          </div>
+          <div>
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" rows="5" required minlength="10" maxlength="1000" aria-describedby="contact-message-hint contact-message-error" class="resize-y"></textarea>
+            <p id="contact-message-hint" class="mt-2 text-sm text-muted">10&ndash;1,000 characters.</p>
+            <p id="contact-message-error" class="mt-2 text-sm text-red-700" hidden></p>
+          </div>
+          <button type="submit" class="min-h-11 rounded bg-ink px-5 py-3 text-sm font-medium text-white hover:bg-accent">Submit message</button>
+          <p id="contact-success" role="status" class="text-sm text-accent" hidden></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="bg-surface py-8 sm:py-10">
+      <div class="mx-auto w-full max-w-[1360px] px-4 text-sm sm:px-6 lg:px-10">
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.5fr]">
+          <div>
+            <p class="text-xl font-bold tracking-tight">SmartShop.</p>
+            <p class="mt-3 max-w-xs leading-relaxed text-muted">A student-built storefront for the CSE-3532 class project.</p>
+            <p class="mt-2 text-muted">Product data and images: Fake Store API.</p>
+          </div>
+          <div>
+            <h2 class="text-base! font-semibold">Contact information</h2>
+            <address class="mt-3 space-y-2 leading-relaxed not-italic text-muted">
+              <p>International Islamic University Chittagong</p>
+              <p>Demo email: <a href="mailto:smartshop@example.com" class="break-all underline underline-offset-4">smartshop@example.com</a></p>
+            </address>
+          </div>
+          <div>
+            <h2 class="text-base! font-semibold">Quick links</h2>
+            <nav aria-label="Footer navigation" class="mt-2 grid grid-cols-2 gap-x-6 [&_a]:flex [&_a]:min-h-11 [&_a]:items-center [&_a]:text-muted [&_a:hover]:text-ink [&_a:hover]:underline [&_a:hover]:underline-offset-4">
+              <a href="#home">Home</a>
+              <a href="#products">Products</a>
+              <a href="#about">About us</a>
+              <a href="#special-offers">Special offer</a>
+              <a href="#reviews">Reviews</a>
+              <a href="#faq">FAQs</a>
+              <a href="#newsletter">Newsletter</a>
+              <a href="#contact">Contact</a>
+            </nav>
+          </div>
+        </div>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p class="text-muted">&copy; <span id="year"></span> SmartShop. Md. Ashiquzzaman Khan.</p>
+          <button id="back-to-top" type="button" class="min-h-11 self-start rounded bg-white px-4 py-2.5 font-medium hover:bg-hover">Back to Top</button>
+        </div>
+      </div>
+    </footer>
+    <div id="toast-region" role="status" aria-live="polite" aria-atomic="true" class="pointer-events-none fixed right-4 bottom-4 left-4 z-50 sm:right-6 sm:left-auto sm:w-96">
+      <div id="notification" hidden class="pointer-events-auto flex items-start gap-3 rounded-md border border-line bg-white p-4 shadow-md"> <!-- taste-skill-ignore: elevation belongs to this floating toast overlay. -->
+        <p id="toast-message" class="min-w-0 flex-1 py-2 text-sm leading-relaxed"></p>
+        <button id="dismiss-toast" type="button" aria-label="Dismiss notification" class="flex size-11 shrink-0 items-center justify-center rounded text-muted hover:bg-surface hover:text-ink"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15"/></svg></button>
+      </div>
+    </div>
+    <noscript>Please enable JavaScript to use the shop.</noscript>
+
+    <template id="product-template">
+      <article class="flex min-w-0 flex-col [&_button]:mt-auto [&_button]:w-full">
+        <div class="mb-3 flex h-42 items-center justify-center rounded bg-image-surface p-5 sm:mb-4 sm:h-52 sm:p-6 [&>img]:size-full [&>img]:object-contain [&>img]:mix-blend-multiply"><img data-product-image width="240" height="220" loading="lazy" /></div>
+        <h3 data-product-title class="line-clamp-2 min-h-[42px] text-sm font-medium sm:min-h-12 sm:text-base"></h3>
+        <p class="mt-1.5 text-[13px] text-muted">Rating: <span data-product-rating></span> <span data-product-reviews></span></p>
+        <p data-product-price class="mt-2 mb-3 text-base font-semibold tabular-nums sm:mt-2.5 sm:mb-4 sm:text-lg"></p>
+        <button data-product-add type="button" class="inline-flex min-h-11 items-center justify-center rounded px-4 py-2.5 text-sm font-medium bg-ink text-white hover:bg-accent">Add to cart</button>
+      </article>
+    </template>
+    <template id="cart-item-template">
+      <div class="flex items-start gap-3 py-3 [&>img]:h-14 [&>img]:w-11 [&>img]:shrink-0 [&>img]:object-contain [&>img]:mix-blend-multiply">
+        <img data-cart-image alt="" width="48" height="60" />
+        <div class="min-w-0 flex-1">
+          <p data-cart-title class="line-clamp-2 text-sm"></p>
+          <p data-cart-price class="mt-1 text-sm font-semibold tabular-nums"></p>
+          <div class="mt-2 flex flex-wrap items-center gap-2 [&_span]:min-w-4 [&_span]:text-center [&_span]:text-sm [&_button:last-child]:ml-auto [&_button:last-child]:px-0">
+            <button data-cart-decrease type="button" aria-label="Decrease quantity" class="min-h-11 min-w-11 rounded bg-white hover:bg-hover">&minus;</button>
+            <span data-cart-quantity aria-label="Quantity"></span>
+            <button data-cart-increase type="button" aria-label="Increase quantity" class="min-h-11 min-w-11 rounded bg-white hover:bg-hover">+</button>
+            <button data-cart-remove type="button" class="min-h-11 p-2 text-sm text-muted hover:text-ink hover:underline hover:underline-offset-4">Remove</button>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template id="review-template">
+      <div class="[&_blockquote]:text-xl [&_blockquote]:leading-relaxed [&_blockquote]:tracking-tight sm:[&_blockquote]:text-2xl">
+        <p data-review-rating class="mb-3 text-sm font-semibold text-accent"></p>
+        <blockquote data-review-comment></blockquote>
+        <div class="mt-5 flex flex-wrap items-baseline gap-x-6 gap-y-2 text-sm [&_p]:font-semibold [&_time]:text-muted"><p data-review-name></p><time data-review-date></time></div>
+      </div>
+    </template>
+    <script type="module" src="/src/app.ts"></script>
+  </body>
+</html>

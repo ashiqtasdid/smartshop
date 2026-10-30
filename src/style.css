@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* These theme colors create Tailwind utilities such as bg-surface and text-ink. */
+@theme {
+  --color-ink: #242825;
+  --color-muted: #626862;
+  --color-surface: #f3f4f1;
+  --color-image-surface: #f7f7f5;
+  --color-line: #8a9287;
+  --color-hover: #e7eae3;
+  --color-accent: #354d3e;
+}
+
+/* Shared HTML defaults; page layouts and component styles use utility classes. */
+@layer base {
+  body { @apply bg-white font-sans text-base leading-normal text-ink; }
+  h2 { @apply text-2xl leading-tight font-semibold tracking-tight sm:text-[28px]; }
+  label { @apply mb-2 block text-sm font-medium; }
+  input, textarea { @apply min-h-11 w-full min-w-0 rounded border border-line bg-white px-3 py-2.5 text-base text-ink placeholder:text-muted aria-invalid:border-red-700; }
+  textarea { @apply leading-relaxed; }
+  button:not(:disabled), summary { @apply cursor-pointer; }
+  button:disabled { @apply cursor-not-allowed opacity-45; }
+  a, button { @apply transition-colors duration-150; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible { @apply outline-2 outline-offset-4 outline-accent; }
+  ::selection { @apply bg-hover text-ink; }
+  [hidden] { display: none !important; }
+}
